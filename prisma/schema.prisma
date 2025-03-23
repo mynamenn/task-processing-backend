@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Task {
+  id           Int        @id @default(autoincrement())
+  
+  // Title of the task.
+  title        String
+
+  // Description of the task.
+  description  String
+
+  // Status of the task.
+  status       TaskStatus @default(NOT_STARTED)
+
+  // Result of the task.
+  result       String   @default("")
+
+  // Timestamp when the task was created.
+  createdAt    DateTime   @default(now())
+
+  // Timestamp when the task was last run.
+  lastRunAt    DateTime?
+
+  // Timestamp when the task was completed.
+  completedAt  DateTime?
+
+  // Expected duration of the task in milliseconds.
+  duration    Int
+
+  // Elapsed time in milliseconds.
+  elapsedTime      Int        @default(0)
+}
+
+enum TaskStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  PAUSED
+  CANCELLED
+  COMPLETED
+}
