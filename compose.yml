@@ -5,9 +5,7 @@ services:
     ports:
       - 3000:3000
   server:
-    # image: mynamenn/task-processing-backend:latest
-    build:
-      dockerfile: Dockerfile
+    image: mynamenn/task-processing-backend:latest
     ports:
       - 8000:8000
     depends_on:
