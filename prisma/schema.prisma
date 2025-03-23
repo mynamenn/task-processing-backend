@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("postgresql://myuser:mypassword@localhost:5432/mydatabase?schema=public")
+  url      = env("DATABASE_URL")
 }
 
 model Task {

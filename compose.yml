@@ -3,22 +3,21 @@ services:
   app:
     image: mynamenn/task-management-ui:latest
     ports:
-      - 80:80
+      - 3000:3000
   server:
-    image: mynamenn/task-processing-backend:latest
+    # image: mynamenn/task-processing-backend:latest
+    build:
+      dockerfile: Dockerfile
     ports:
       - 8000:8000
     depends_on:
       postgres:
         condition: service_healthy
+    networks:
+      - prisma-network
     environment:
       PORT: 8000
       NODE_ENV: production
-      POSTGRES_PORT: 5432
-      POSTGRES_HOST: postgres
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydatabase
       DATABASE_URL: "postgresql://myuser:mypassword@postgres:5432/mydatabase?schema=public"
   postgres:
     image: postgres:15
@@ -28,6 +27,8 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - prisma-network
     healthcheck:
       test: ["CMD", "pg_isready"]
       interval: 10s
@@ -37,6 +38,10 @@ services:
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mypassword
       - POSTGRES_DB=mydatabase
+
+networks:
+  prisma-network:
+    name: prisma-network
 
 volumes:
   pgdata:
