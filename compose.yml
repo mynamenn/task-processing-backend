@@ -17,9 +17,9 @@ services:
       POSTGRES_PORT: 5432
       POSTGRES_HOST: postgres
       POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: frontierhealth
+      POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydatabase
-      DATABASE_URL: "postgresql://myuser:frontierhealth@postgres:5432/mydatabase?schema=public"
+      DATABASE_URL: "postgresql://myuser:mypassword@postgres:5432/mydatabase?schema=public"
   postgres:
     image: postgres:15
     container_name: postgres
@@ -34,8 +34,9 @@ services:
       timeout: 5s
       retries: 5
     environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
       - POSTGRES_DB=mydatabase
-      - POSTGRES_PASSWORD=frontierhealth
 
 volumes:
   pgdata:

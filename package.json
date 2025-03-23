@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "npx prisma migrate deploy && node src/index.js",
     "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "push": "docker-compose build && docker tag task-processing-backend mynamenn/task-processing-backend && docker push mynamenn/task-processing-backend"
+    "push": "docker build -t task-processing-api . && docker tag task-processing-backend mynamenn/task-processing-backend && docker push mynamenn/task-processing-backend"
   },
   "keywords": [],
   "author": "",
