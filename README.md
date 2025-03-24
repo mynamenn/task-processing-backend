@@ -54,8 +54,6 @@ For pausing and resuming a task, I've used `clearTimeout` to clear a timer insta
 
 For frontend, as the number of tasks increase, we will need pagination to ensure efficient loading of tasks. We should also have account creation with access controls.
 
-When calling API endpoints that modify tasks, we should hash specific fields and put them a `If-Match` header for the backend to compare if the task object has changed. If it has changed, the backend will not modify the task since it might have been modified by another user.
-
 For backend, we should replace `taskStore.js` (which simulates task execution with `setTimeout`) with a production task queue like [Celery](https://www.fullstackpython.com/celery.html).
 
 In general, we should use TypeScript instead of JavaScript for this system for better type safety and maintainability. JS was used for this demo since I have limited time. Also, frontend E2E tests and backend tests must be implemented in a production system.
